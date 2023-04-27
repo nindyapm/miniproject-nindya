@@ -20,10 +20,10 @@ const Navbar = () => {
                     className="navbarNavAltMarkup collapse navbar-collapse justify-content-end"
                 >
                     <div className="navbar-nav">
-                        <a className="nav-link" href="#">
+                        <a className="nav-link" href="/LandingPage">
                             Home
                         </a>
-                        <a className="nav-link" href="#">
+                        <a className="nav-link" href="/ProductPage">
                             Product
                         </a>
                         <a className="nav-link" href="#">
