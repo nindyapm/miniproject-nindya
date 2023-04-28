@@ -15,7 +15,7 @@ const Card = () => {
                         </p>
                     </div>
                     <div className="col-md-5">
-                        <a href="#" className="btn btn-outline-secondary">
+                        <a href="/DetailProduct" className="btn btn-outline-secondary">
                             Detail
                         </a>
                     </div>
