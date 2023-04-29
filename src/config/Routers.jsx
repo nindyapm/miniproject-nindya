@@ -1,6 +1,7 @@
 import DetailProduct from "../pages/DetailProduct";
 import KeranjangPesanan from "../pages/KeranjangPesanan";
 import LandingPage from "../pages/LandingPage";
+import PengirimanPage from "../pages/PengirimanPage";
 import ProductPage from "../pages/ProductPage";
 
 const Routers = [
@@ -23,6 +24,10 @@ const Routers = [
     {
         path: "/KeranjangPesanan",
         element: <KeranjangPesanan/>,
+    },
+    {
+        path: "/Pengiriman",
+        element: <PengirimanPage/>,
     },
 ];
 
