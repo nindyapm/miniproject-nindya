@@ -75,7 +75,9 @@ const Pesanan = () => {
                                     Rp.200.000
                                 </div>
                             </div>
-                            <button type="button" className="checkout-btn">CHECKOUT</button>
+                            <a href="/Pengiriman">
+                                <button type="button" className="checkout-btn">CHECKOUT</button>
+                            </a>
                         </div>
                     </div>
                 </div>
