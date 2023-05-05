@@ -125,12 +125,39 @@ const Pembayaran = () => {
                     </div>
                     {/* Button Pembayaran */}
                     <div style={{textAlign:'center'}}>
-                        <button type="button" className="pembayaran-btn">PROSES PEMBAYARAN</button>
+                        <button 
+                            type="button" 
+                            className="pembayaran-btn" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#pembayaranModal"
+                        >
+                            PROSES PEMBAYARAN
+                        </button>
                     </div>
                 </div>
             </div>
-        </section>
-    )
+            <>
+                {/* Modal */}
+                <div
+                    className="modal fade"
+                    id="pembayaranModal"
+                    tabIndex={-1}
+                    aria-labelledby="pembayaranModalLabel"
+                    aria-hidden="true"
+                >
+                    <div className="modal-dialog">
+                        <h6 className="text-pembayaranBerhasil">Pembayaran Berhasil</h6>
+                        <div style={{textAlign:'center'}}>
+                            <i className="fa fa-check-circle fa-3x mt-4" aria-hidden="true"/>
+                        </div>
+                        <a href="/LandingPage">
+                            <button type="button" className="ok-btn">OK</button>
+                        </a>
+                    </div>
+                </div>
+            </>
+        </section>     
+    )  
 }
 
 export default Pembayaran
