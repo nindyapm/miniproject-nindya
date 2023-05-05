@@ -1,4 +1,5 @@
 import DetailProduct from "../pages/DetailProduct";
+import KeranjangPesanan from "../pages/KeranjangPesanan";
 import LandingPage from "../pages/LandingPage";
 import ProductPage from "../pages/ProductPage";
 
@@ -18,6 +19,10 @@ const Routers = [
     {
         path: "/DetailProduct",
         element: <DetailProduct/>,
+    },
+    {
+        path: "/KeranjangPesanan",
+        element: <KeranjangPesanan/>,
     },
 ];
 
