@@ -1,3 +1,4 @@
+import DetailProduct from "../pages/DetailProduct";
 import LandingPage from "../pages/LandingPage";
 import ProductPage from "../pages/ProductPage";
 
@@ -13,6 +14,10 @@ const Routers = [
     {
         path: "/LandingPage",
         element: <LandingPage/>,
+    },
+    {
+        path: "/DetailProduct",
+        element: <DetailProduct/>,
     },
 ];
 
