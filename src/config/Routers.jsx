@@ -19,7 +19,7 @@ const Routers = [
         element: <LandingPage/>,
     },
     {
-        path: "/DetailProduct",
+        path: "/DetailProduct/",
         element: <DetailProduct/>,
     },
     {

@@ -1,4 +1,7 @@
+import { Link } from 'react-router-dom';
+
 const Card = ({card}) => {
+
     return (
         <div className="card h-100" style={{ width: "15rem" }}>
             <img className="card-img-top" 
@@ -13,9 +16,9 @@ const Card = ({card}) => {
                         </p>
                     </div>
                     <div className="col-md-5">
-                        <a href="/DetailProduct" className="btn btn-outline-secondary">
+                        <Link to={"/DetailProduct"} state={{data: card}} className="btn btn-outline-secondary">
                             Detail
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>
