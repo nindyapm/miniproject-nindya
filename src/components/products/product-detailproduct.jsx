@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { gql, useMutation} from "@apollo/client";
 import uuid from 'react-uuid';
@@ -16,35 +17,36 @@ const GetProductList = gql`
                 gambarProduct
             }
         }
-    `
+`
 
 const ADD_PRODUCT = gql `
-    mutation MyQuery($object: Product_insert_input!) {
+    mutation MyQuery($object: Cart_insert_input!) {
         insert_Cart_one(object: $object) {
             idCart
+		    namaTas
             jumlahTas
             motifTas
-            subtotal
+            total
         }
     }
 `
 
 const Detail = () => {
-    const card = useLocation()
-    console.log(card);
+    const dataTas = useLocation()
+    console.log(dataTas);
 
     const [insertProduct] = useMutation(ADD_PRODUCT, {
         refetchQueries: [GetProductList]
     })
 
-    const [cart,setCart] = useState({
+    const [cart, setCart] = useState({
         idCart: "",
         jumlahTas:"",
         motifTas:"",
-        subtotal:"",
+        total:"",
     })
 
-    const handleInputData = e => {
+    const handleInputData = (e) => {
         const name = e.target.name;
         let value = e.target.value;
 
@@ -54,45 +56,54 @@ const Detail = () => {
         }))
     }
 
-    const handleSubmitData = e => {
+    const handleSubmitData = (e) => {
         e.preventDefault();
+        const total = dataTas.state.data.hargaProduct * Number(cart.jumlahTas)
         
+        console.log(dataTas);
+
         insertProduct({
             variables: {
                 object: {
                     idCart: uuid(),
+                    namaTas: dataTas.state.data.namaProduct,
+                    gambarTas: dataTas.state.data.gambarProduct,
                     jumlahTas: cart.jumlahTas,
                     motifTas: cart.motifTas,
-                    subtotal: cart.subtotal
+                    hargaTas: dataTas.state.data.hargaProduct,
+                    total: total
                 }
             }
+        }).then(() => {
+            alert(`Product ${dataTas.state.data.namaProduct} berhasil ditambahkan`)
+        }).catch((error) => {
+            console.log(error)
+            alert(`Product ${dataTas.state.data.namaProduct} gagal ditambahkan`)
         })
-
-
     }
 
     return (
-        <section className="DetailProduct" key={card.state.data.idProduct}>
+        <section className="DetailProduct" key={dataTas.state.data.idProduct}>
             <p className="text-content" style={{fontSize:'20px', paddingTop:'15px'}}>Detail Tas</p>
             <div className="container deskripsi">
                 <div className="row mt-4">
                     <div className="col-lg-5">
                         <img 
                             className="w-100 detail-foto"
-                            src={card.state.data.gambarProduct}
+                            src={dataTas.state.data.gambarProduct}
                             alt="Tas Rotan"
                         />
                     </div>
                     <div className="col-lg-7">
-                        <h5 className="NamaTas">{card.state.data.namaProduct}</h5>
-                        <p className="Harga mt-3">Rp.{card.state.data.hargaProduct}</p>
-                        <p className="Deskripsi">{card.state.data.deskripsiProduct}</p>
+                        <h5 className="NamaTas">{dataTas.state.data.namaProduct}</h5>
+                        <p className="Harga mt-3">Rp.{dataTas.state.data.hargaProduct}</p>
+                        <p className="Deskripsi">{dataTas.state.data.deskripsiProduct}</p>
                         <div className="row">
                             <div className="col-sm-2">
                                 <p>Kategori</p>  
                             </div>
                             <div className="col">
-                                <p className="Kategori">: {card.state.data.kategoriProduct}</p>  
+                                <p className="Kategori">: {dataTas.state.data.kategoriProduct}</p>  
                             </div>
                         </div>
                         <div className="row">
@@ -100,7 +111,7 @@ const Detail = () => {
                                 <p>Ukuran</p>
                             </div>
                             <div className="col">
-                                <p className="Ukuran">: {card.state.data.ukuranProduct} </p>
+                                <p className="Ukuran">: {dataTas.state.data.ukuranProduct} </p>
                             </div>
                         </div>
                         <div className="row">
@@ -108,11 +119,11 @@ const Detail = () => {
                                 <p>Berat</p>
                             </div>
                             <div className="col">
-                             <p className="Berat">: {card.state.data.beratProduct}</p>
+                             <p className="Berat">: {dataTas.state.data.beratProduct}</p>
                             </div>
                         </div>
                         <p className="Beli">Beli Sekarang</p>
-                        <form>
+                        <form >
                             <div className="row">
                                 <div className="col-auto">
                                     <label htmlFor="jumlah-product" className="form-label">
@@ -125,7 +136,7 @@ const Detail = () => {
                                         className={'form-control jumlahTas'}
                                         value={cart.jumlahTas}
                                         id="jumlah-product"
-                                        name= "JumlahProduct"
+                                        name= "jumlahTas"
                                         onChange={handleInputData}
                                     />
                                 </div>
@@ -142,7 +153,7 @@ const Detail = () => {
                                         className={'form-control motifTas'}
                                         value={cart.motifTas}
                                         id="motif-product"
-                                        name= "MotifProduct"
+                                        name= "motifTas"
                                         onChange={handleInputData}
                                     />
                                 </div>
@@ -150,7 +161,7 @@ const Detail = () => {
                             <button 
                                 type="button" 
                                 className="tambah-btn"
-                                onSubmit={handleSubmitData}
+                                onClick={handleSubmitData}
                             >
                                 Masukkan Ke Keranjang
                             </button>

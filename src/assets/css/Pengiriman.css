@@ -21,7 +21,7 @@
     padding: 40px;
 }
 
-.JasaPengiriman {
+.Pengiriman {
     background-color: #FBF7F0;
     width: 300px;
 }
@@ -29,8 +29,17 @@
 .Total {
     background-color: #FBF7F0;
     padding: 20px;
-    /* margin-left: 20%; */
-   
+}
+
+.teks-metodePembayaran {
+    font-weight: bold;
+    margin-top: 40px;
+}
+
+.metodePembayaran {
+    background-color: #FBF7F0;
+    width: 300px;
+    margin-left: 1px;
 }
 
 .bayar-btn {

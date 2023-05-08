@@ -1,7 +1,5 @@
-import Navbar from "../components/navbar/navbar"
+import Navbar from "../components/navbar/Navbar"
 import ProductPengiriman from "../components/products/product-pengiriman"
-import Alamat from "../components/products/product-alamatpengiriman"
-import SummaryPengiriman from "../components/products/product-summarypengiriman"
 import Footer from "../components/footer/Footer"
 import "../assets/css/Pengiriman.css"
 
@@ -10,8 +8,6 @@ const PengirimanPage = () => {
         <>
             <Navbar />
             <ProductPengiriman />
-            <Alamat />
-            <SummaryPengiriman />
             <Footer />
         </>
     )

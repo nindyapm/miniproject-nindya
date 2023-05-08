@@ -15,7 +15,7 @@ const Header = () => {
                             Melestarikan produk lokal pilihan terbaik.
                         </div>
                         <div className="buttons">
-                            <a href="#" className="btn">
+                            <a href="/ProductPage" className="btn">
                                 Beli Sekarang
                             </a>
                         </div>
