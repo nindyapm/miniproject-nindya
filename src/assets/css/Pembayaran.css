@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Arimo:wght@500&family=EB+Garamond:wght@500&family=Lato&family=Lora&display=swap');
+
+.Pembayaran {
+    margin-top: 50px;
+    font-family: 'Arimo';
+}
+
+.main-bayar {
+    margin: auto;
+    background-color: #FBF7F0;
+    width: 60%;
+    padding: 20px;
+    font-size: 14px;
+}
+
+.ringkasan {
+    font-weight: bold;
+    text-align: center;
+}
+
+.teks-alamat {
+    font-weight: bold;
+}
+
+.icon-edit {
+    color: black;
+}
+
+.namaTas {
+    padding-top: 5px;
+    font-weight: bold;
+}
+
+.hargaTas {
+    text-align: end;
+}
+
+.teks-TotalHargaTas {
+    padding-top: 5px;
+    font-weight: bold;
+}
+
+.TotalHargaTas {
+    text-align: end;
+}
+
+.jasaPengiriman {
+    padding-top: 5px;
+    font-weight: bold;
+}
+
+.JasaPengiriman {
+    text-align: end;
+}
+
+.teks-totalPembayaran {
+    font-weight: bold;
+}
+
+.metodePembayaran {
+    padding-top: 5px;
+    font-weight: bold;
+}
+
+.MetodePembayaran {
+    text-align: end;
+}
+
+.totalPembayaran {
+    text-align: end;
+    font-weight: bold;
+}
+
+.pembayaran-btn {
+    background-color: #555555;
+    border-radius: 10px;
+    border-style: none;
+    width: 250px;
+    height: 40px;
+    color: white;
+    font-family: 'Lato';
+    margin-top: 20px;
+}
+
+.modal-dialog {
+    background-color: #FBF7F0;
+    width: 300px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.text-pembayaranBerhasil {
+    font-weight: bold;
+    text-align: center;
+}
+
+.fa {
+    color: #555555;
+}
+
+.ok-btn {
+    background-color: #555555;
+    border-radius: 10px;
+    border-style: none;
+    width: 200px;
+    height: 40px;
+    color: white;
+    font-family: 'Lato';
+    margin: 40px 30px 20px;
+}
