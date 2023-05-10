@@ -1,5 +1,5 @@
 import Footer from "../components/footer/Footer"
-import Navbar from "../components/navbar/navbar"
+import Navbar from "../components/navbar/Navbar"
 import Detail from "../components/products/product-detailproduct"
 import "../assets/css/DetailProduct.css"
 

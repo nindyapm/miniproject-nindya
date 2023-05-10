@@ -1,23 +1,8 @@
 import { useState } from 'react';
-import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { gql, useMutation} from "@apollo/client";
+import { GetProduct } from '../get-data/GetCart';
 import uuid from 'react-uuid';
-
-const GetProductList = gql`
-        query GetProduct {
-            Product{
-                idProduct
-                namaProduct
-                hargaProduct
-                deskripsiProduct
-                kategoriProduct
-                ukuranProduct
-                beratProduct
-                gambarProduct
-            }
-        }
-`
 
 const ADD_PRODUCT = gql `
     mutation MyQuery($object: Cart_insert_input!) {
@@ -36,7 +21,7 @@ const Detail = () => {
     console.log(dataTas);
 
     const [insertProduct] = useMutation(ADD_PRODUCT, {
-        refetchQueries: [GetProductList]
+        refetchQueries: [GetProduct]
     })
 
     const [cart, setCart] = useState({
@@ -59,8 +44,6 @@ const Detail = () => {
     const handleSubmitData = (e) => {
         e.preventDefault();
         const total = dataTas.state.data.hargaProduct * Number(cart.jumlahTas)
-        
-        console.log(dataTas);
 
         insertProduct({
             variables: {

@@ -1,4 +1,4 @@
-import Navbar from "../components/navbar/navbar"
+import Navbar from "../components/navbar/Navbar"
 import Header from "../components/header/Header"
 import Content from "../components/content-landingpage/content"
 import FavProduct from "../components/products/product-landingpage"

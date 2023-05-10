@@ -1,34 +1,24 @@
 import { GetProduct } from "../get-data/GetCart";
 import { useState } from "react"
-import {gql, useMutation, useQuery} from "@apollo/client"
-import { GetPemesanan } from "../get-data/GetPemesanan"
+import { useQuery } from "@apollo/client"
 import uuid from "react-uuid";
+import { Link } from 'react-router-dom';
 
-const ADD_PRODUCT = gql `
-mutation MyMutation($object: Pemesanan_insert_input!) {
-    insert_Pemesanan_one(object: $object) {
-      idPemesanan
-      namaCustomer
-      nomorHP
-      provinsi
-      alamat
-      kota
-      kecamatan
-      kelurahan
-      kodePos
-      jasaPengiriman
-      metodePembayaran
-      totalPembayaran
+//fungsi menghitung subtotal harga tas
+const SubtotalTas = (data) => {
+    let subtotal = 0;
+    if (data.length > 0) {
+        data?.forEach((data) => {
+            subtotal += data.total;
+        });
     }
-  }  
-`
+    console.log(subtotal);
+    return subtotal
+}
 
 const ProductPengiriman = () => {
-    const {data} = useQuery(GetProduct)
 
-    const [insertProduct] = useMutation(ADD_PRODUCT, {
-        refetchQueries: [GetPemesanan]
-    })
+    const {data, loading} = useQuery(GetProduct)
 
     const [pengiriman, setPengiriman] = useState({
         idPemesanan: uuid(),
@@ -41,9 +31,7 @@ const ProductPengiriman = () => {
         kelurahan:"",
         kodePos:"",
         jasaPengiriman:"",
-        hargaJasaPengiriman:"",
-        totalPembayaran:"",
-        metodePembayaran:""
+        metodePembayaran:"",
     })
 
     const handleInputData = e => {
@@ -56,35 +44,13 @@ const ProductPengiriman = () => {
         }))
     }
 
-    const handleSubmitData = e => {
-        e.preventDefault();
-        
-        insertProduct({
-            variables: {
-                object: {
-                    idPemesanan: uuid(),
-                    namaCustomer:"",
-                    nomorHP:"",
-                    alamat:"",
-                    provinsi:"",
-                    kota:"",
-                    kecamatan:"",
-                    kelurahan:"",
-                    kodePos:"",
-                    jasaPengiriman:"",
-                    totalPembayaran:"",
-                    metodePembayaran:""
-                }
-            }
-        })
-    }
-
     return (
         <>
             <section className="productPengiriman">
                 <p className="text-content" style={{fontSize:'20px', paddingTop:'15px'}}>Pengiriman</p>
                 <div className="container">
                     {
+                        !loading?
                         data?.Cart.map((item) => (
                             <div className="row" key={item.idCart} item={item}>
                                 <div className="col-2" style={{width:'200px'}}>
@@ -95,7 +61,7 @@ const ProductPengiriman = () => {
                                     />
                                 </div>
                                 <div className="col-5">
-                                    <h6 className="NamaTas">Tas Rotan</h6>        
+                                    <h6 className="NamaTas">{item.namaTas}</h6>        
                                     <div className="row">
                                         <div className="col-auto">
                                             <label htmlFor="jumlah-product" className="form-label">
@@ -103,7 +69,7 @@ const ProductPengiriman = () => {
                                             </label>
                                         </div>
                                         <div className="col">
-                                            <p>: {item.jumlahTas}</p>
+                                            <p>: {item.jumlahTas} x Rp.{item.hargaTas}</p>
                                         </div>
                                     </div>
                                     <div className="row" style={{marginTop:'10px'}}>
@@ -118,27 +84,29 @@ const ProductPengiriman = () => {
                                     </div>
                                 </div>
                                 <div className="col-sm-auto">
-                                    <p className="Harga mt-3" style={{textAlign:'end'}}>Rp.{item.subtotal}</p>
+                                    <p className="Harga mt-3" style={{textAlign:'end'}}>Rp.{item.total}</p>
                                 </div>
                             </div>
-                        ))
+                        )) :
+                        <div> <p style={{textAlign:"center", color:"black"}}>Loading...</p> </div>
                     }
                 </div>
             </section>
-
+            
+            {/* Form Alamat Pengiriman */}
             <section className="Alamat">
             <div className="container-fluid">
                 <p style={{fontWeight:'bold'}}>Alamat Pengiriman</p>
                 <div className="row">
                     <div className="col-5">
                         <label htmlFor="Nama">Nama</label>
-                        <input 
+                        <input
                             className="form-control formAlamat"
                             type="text" 
                             id="Nama" 
                             name="namaCustomer"
                             value={pengiriman.namaCustomer}
-                            onChange={handleInputData}
+                            onChange={handleInputData} validate
                         />
                         <label htmlFor="NomorHP" className="NoHP mt-3">Nomor HP</label>
                         <input 
@@ -259,6 +227,7 @@ const ProductPengiriman = () => {
                                     id="virtualAcc"
                                     name="metodePembayaran"
                                     defaultValue="VIRTUAL ACCOUNT"
+                                    onChange={handleInputData}
                                 />
                                 <label htmlFor="virtualAcc" className="m-2" style={{fontWeight:'bold'}}>
                                     VIRTUAL ACCOUNT
@@ -270,6 +239,7 @@ const ProductPengiriman = () => {
                                     id="dana"
                                     name="metodePembayaran"
                                     defaultValue="DANA"
+                                    onChange={handleInputData}
                                 />
                                 <label htmlFor="dana" className="m-2" style={{fontWeight:'bold'}}>
                                     DANA
@@ -281,6 +251,7 @@ const ProductPengiriman = () => {
                                     id="linkaja"
                                     name="metodePembayaran"
                                     defaultValue="LINK AJA"
+                                    onChange={handleInputData}
                                 />
                                 <label htmlFor="linkaja" className="m-2" style={{fontWeight:'bold'}}>
                                     LINK AJA
@@ -292,6 +263,7 @@ const ProductPengiriman = () => {
                                     id="gopay"
                                     name="metodePembayaran"
                                     defaultValue="GOPAY"
+                                    onChange={handleInputData}
                                 />
                                 <label htmlFor="gopay" className="m-2" style={{fontWeight:'bold'}}>
                                     GOPAY
@@ -303,6 +275,7 @@ const ProductPengiriman = () => {
                                     id="ovo"
                                     name="metodePembayaran"
                                     defaultValue="OVO"
+                                    onChange={handleInputData}
                                 />
                                 <label htmlFor="ovo" className="m-2" style={{fontWeight:'bold'}}>
                                     OVO
@@ -316,10 +289,10 @@ const ProductPengiriman = () => {
                             <hr />
                             <div className="row">
                                 <div className="col">
-                                    Total Pembelian <br/>
+                                    Total Harga Tas <br/>
                                 </div>
                                 <div className="col" style={{textAlign:'end'}}>
-                                    Rp.200.000 <br />
+                                    Rp. {data?.Cart?.length > 0 && SubtotalTas(data?.Cart)}<br />
                                 </div>
                             </div>
                             <hr />
@@ -328,26 +301,20 @@ const ProductPengiriman = () => {
                                     TOTAL   
                                 </div>
                                 <div className="col" style={{textAlign:'end', fontWeight:'bold'}}>
-                                    Rp.220.000
+                                    Rp. {data?.Cart?.length > 0 && SubtotalTas(data?.Cart)}
                                 </div>
                             </div>
                             <div style={{textAlign:'right'}}>
-                                <a href="/Pembayaran">
-                                    <button type="button" className="bayar-btn"
-                                        onClick={handleSubmitData}
-                                    >
-                                        BAYAR
-                                    </button>
-                                </a>
+                                <Link to={"/Pembayaran"} state={pengiriman} className="btn bayar-btn">
+                                    BAYAR
+                                </Link>        
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-        </>
-
-        
+            </section>
+        </>   
     )
 }
 

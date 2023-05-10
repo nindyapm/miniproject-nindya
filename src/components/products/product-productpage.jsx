@@ -20,7 +20,7 @@ const AllProduct = () => {
 			}
 		}
 	`
-    const { data } = useQuery(SEARCH_PRODUCT_QUERY, {
+    const { data, loading } = useQuery(SEARCH_PRODUCT_QUERY, {
         variables: {
             namaProduct: `%${search}%`,
         },
@@ -45,11 +45,13 @@ const AllProduct = () => {
                 </div>
                 <div className="row row-cols-1 row-cols-md-3 row-col-sm-3 gy-4 mt-3">
                         {
+                            !loading?
                             data?.Product.map((card) => (
                                 <div className="col main-card">
                                     <Card key={card.namaProduct} card={card} />
                                 </div>
-                            ))
+                            )) :
+                            <div> <p style={{textAlign:"center", color:"black"}}>Loading...</p> </div>
                         }
                 </div>
             </div>

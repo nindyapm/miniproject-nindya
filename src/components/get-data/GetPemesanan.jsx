@@ -15,6 +15,8 @@ query MyQuery {
       jasaPengiriman
       metodePembayaran
       totalPembayaran
+      namaTas
+      jumlahTas
     }
   }
 `

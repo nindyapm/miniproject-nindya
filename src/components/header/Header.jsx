@@ -1,4 +1,5 @@
 import main from "../../assets/img/main.jpg"
+import { Link } from "react-router-dom"
 
 const Header = () => {
     return (
@@ -15,9 +16,9 @@ const Header = () => {
                             Melestarikan produk lokal pilihan terbaik.
                         </div>
                         <div className="buttons">
-                            <a href="/ProductPage" className="btn">
+                            <Link to={"/ProductPage"} className="btn">
                                 Beli Sekarang
-                            </a>
+                            </Link>
                         </div>
                     </div>
                     <div className="col-md-6 col-lg-6">

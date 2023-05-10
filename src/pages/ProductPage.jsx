@@ -1,4 +1,4 @@
-import Navbar from "../components/navbar/navbar"
+import Navbar from "../components/navbar/Navbar"
 import AllProduct from "../components/products/product-productpage"
 import Footer from "../components/footer/Footer"
 import "../assets/css/ProductPage.css"
