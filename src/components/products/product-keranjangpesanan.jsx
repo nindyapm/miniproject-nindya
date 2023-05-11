@@ -3,7 +3,7 @@ import { useState } from "react";
 import { GetProduct } from "../get-data/GetCart";
 import { Link } from "react-router-dom";
 
-const DELETE_PRODUCTS = gql`
+export const DELETE_PRODUCTS = gql`
 mutation MyMutation ($idCart: uuid!){
     delete_Cart_by_pk(idCart: $idCart) {
       idCart

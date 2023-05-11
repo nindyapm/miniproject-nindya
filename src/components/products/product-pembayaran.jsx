@@ -26,6 +26,17 @@ mutation MyMutation($object: Pemesanan_insert_input!) {
     }
   }  
 `
+const DELETE_PRODUCTS = gql `
+mutation MyMutation {
+    delete_Cart(where: {}) {
+      returning {
+        idCart
+        namaTas
+        motifTas
+      }
+    }
+  }
+`
 
 //fungsi menghitung subtotal harga tas
 const SubtotalTas = (data) => {
@@ -45,6 +56,18 @@ const Pembayaran = () => {
     const [insertProduct] = useMutation(ADD_PRODUCT, {
         refetchQueries: [GetPemesanan]
     })
+
+    const [deleteProduct] = useMutation(DELETE_PRODUCTS, {
+        refetchQueries: [GetProduct]
+    })
+
+    // const handleDelete = (idCart) => {
+    //         deleteProduct({
+    //             variables: {
+    //                 idCart: idCart
+    //             }
+    //         })
+    // }
 
     //get data dari state pengiriman
     const {state} = useLocation()
@@ -76,12 +99,15 @@ const Pembayaran = () => {
                 }
             }
         }).then(() => {
+            deleteProduct();
            navigate('/LandingPage');
         }).catch((error) => {
             console.log(error)
             alert(`Pemesanan gagal ditambahkan`)
         })
     }
+
+
 
     return (
         <section className="Pembayaran">
